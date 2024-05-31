@@ -1,0 +1,47 @@
+@import url(https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 250 250 250;
+    --foreground: 244 244 245;
+    --primary: 52 51 56;
+    --secondary: 145 144 161;
+    --accent: 219 219 226;
+    --mute: 166 166 180;
+    --warning: 202 138 4;
+    --warning-foreground: 255 204 0;
+    --danger: 239 68 68;
+    --danger-foreground: 252 165 165;
+    --success: 16 185 129;
+    --success-foreground: 110 231 183;
+    --action: 125 211 252;
+  }
+
+  .dark {
+    --background: 10 10 10;
+    --foreground: 23 23 23;
+    --primary: 229 231 235;
+    --secondary: 115 115 115;
+    --accent: 38 38 38;
+    --mute: 64 64 64;
+    --warning: 202 138 4;
+    --warning-foreground: 113 63 18;
+    --danger: 252 165 165;
+    --danger-foreground: 69 10 10;
+    --success: 110 231 183;
+    --success-foreground: 2 44 34;
+    --action: 3 105 161;
+  }
+  * {
+    /* @apply outline outline-1 outline-red-500; */
+  }
+  body {
+    @apply font-almarai bg-background;
+    position: relative;
+    min-height: 100dvh;
+  }
+}
