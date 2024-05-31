@@ -1,6 +1,12 @@
-# Tinybase CRUD starter
+# Opinionated CRUD Tinybase Starter
 
-### Vite + React-ts + TypeScript + tailwindcss + tanStack router + tinybase + Shadcn/ui
+This starter kit combines the best tools for building modern, high-performance web applications:
+
+- [TinyBase](https://tinybase.org/) with React for data storing
+- [Vite](https://vitejs.dev/) for lightning-fast development
+- [TanStack](https://tanstack.com/router/latest) Router for powerful routing
+- [TailwindCSS](https://tailwindcss.com/) for utility-first styling
+- [Shadcn/UI](https://ui.shadcn.com/) for beautiful, customizable UI components
 
 ## Store scheme
 

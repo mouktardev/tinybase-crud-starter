@@ -48,7 +48,7 @@ export const NoteUpdate = (props: typeof CellProps) => {
         undefined,
         (store, partialRow) => {
             const name = store.getCell('person', `${partialRow.personId}`, 'name')
-            toast.success(`a note is Edited inside: ${name}`);
+            toast.success(`a note is edited inside: ${name}`);
         }
     );
 
@@ -66,7 +66,7 @@ export const NoteUpdate = (props: typeof CellProps) => {
             </DialogTrigger>
             <DialogContent className="max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Edit Note</DialogTitle>
+                    <DialogTitle>Edit a note</DialogTitle>
                 </DialogHeader>
                 <Form {...form}>
                     <form

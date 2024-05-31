@@ -8,7 +8,7 @@ export const Route = createFileRoute('/_layout/person')({
 
 function PersonLayout() {
   return (
-    <div className='mx-auto max-w-[700px] space-y-5 rounded-lg border border-accent p-5'>
+    <div className='mx-auto w-full space-y-5 rounded-lg border border-accent p-5 md:w-[700px]'>
       <PersonCreate />
       <div className="grid gap-2 md:grid-cols-[auto_1fr]">
         <PersonRead />
