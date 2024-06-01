@@ -82,6 +82,41 @@ export const {
 } = UiReactWithSchemas;
 ```
 
+## TanStack router:
+
+Using typed router context in [TanStack](https://tanstack.com/router/latest) we can pass tinybase store so we can utilize loaders and check if data is in in the database using the url param otherwise throw a `NotFound` and render that component here an example `person.$person`
+
+```js
+export const Route = createFileRoute("/_layout/person/$person")({
+  loader: ({ params: { person }, context: { store } }) => {
+    if (!store?.hasRow("person", person)) {
+      throw notFound();
+    }
+  },
+  notFoundComponent: () => {
+    return (
+      <div className="flex items-center justify-center gap-3 border border-warning bg-warningForeground p-2">
+        <LuAlertCircle className="size-4 text-warning" />
+        <p className="font-bold leading-none text-warning">
+          This person doesn't exist!
+        </p>
+      </div>
+    );
+  },
+  component: Person,
+});
+
+function Person() {
+  const { person } = Route.useParams();
+  return (
+    <div className="space-y-3">
+      <NoteCreate personId={person} />
+      <NoteRead personId={person} />
+    </div>
+  );
+}
+```
+
 ## Theming
 
 This starter is using [shadcn/ui](https://ui.shadcn.com/) which is built on [radix-ui](https://www.radix-ui.com/primitives/docs/overview/introduction) primitives but with a little bit of changes to match the color variables in `style.css`.
@@ -132,39 +167,4 @@ theme: {
         }
       }
   }
-```
-
-## TanStack router:
-
-Using typed router context in [TanStack](https://tanstack.com/router/latest) we can pass tinybase store so we can utilize loaders and check if data is in in the database using the url param otherwise throw a `NotFound` and render that component here an example `person.$person`
-
-```js
-export const Route = createFileRoute("/_layout/person/$person")({
-  loader: ({ params: { person }, context: { store } }) => {
-    if (!store?.hasRow("person", person)) {
-      throw notFound();
-    }
-  },
-  notFoundComponent: () => {
-    return (
-      <div className="flex items-center justify-center gap-3 border border-warning bg-warningForeground p-2">
-        <LuAlertCircle className="size-4 text-warning" />
-        <p className="font-bold leading-none text-warning">
-          This person doesn't exist!
-        </p>
-      </div>
-    );
-  },
-  component: Person,
-});
-
-function Person() {
-  const { person } = Route.useParams();
-  return (
-    <div className="space-y-3">
-      <NoteCreate personId={person} />
-      <NoteRead personId={person} />
-    </div>
-  );
-}
 ```
