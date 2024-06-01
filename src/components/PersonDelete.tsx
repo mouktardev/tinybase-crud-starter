@@ -1,4 +1,4 @@
-import { CellProps, CellView, useDelRowCallback, useLocalRowIds } from "@/schema";
+import { CellProps, CellView, useCell, useDelRowCallback, useLocalRowIds } from "@/schema";
 import { useState } from "react";
 import { LuTrash } from "react-icons/lu";
 import { toast } from "sonner";
@@ -7,13 +7,14 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 
 export function PersonDelete(props: typeof CellProps) {
     const [open, setOpen] = useState<boolean>(false);
+    const person = useCell("person", props.rowId, "name")
     const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
     const removeRow = useDelRowCallback(
         props.tableId,
         props.rowId,
         undefined,
         () => {
-            toast.success(`Person removed`);
+            toast.success(`${person} is removed`);
         }
     );
     return (
@@ -21,7 +22,7 @@ export function PersonDelete(props: typeof CellProps) {
             onOpenChange={(open) =>
                 personIdsLinkedToNotes.length === 0
                     ? setOpen(open)
-                    : toast.error("person has notes")
+                    : toast.error(`${person} has notes`)
             }>
             <DialogTrigger asChild>
                 <Button type="button" className="rounded-lg px-2 py-1 text-danger hover:bg-dangerForeground">

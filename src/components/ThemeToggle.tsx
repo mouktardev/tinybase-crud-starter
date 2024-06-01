@@ -22,7 +22,6 @@ export default function ThemeToggle() {
 			isThemeDark: !isDark,
 		}),
 		[isDark],
-		// undefined for the default context Store, provide an Id for a named context Store, or provide an explicit reference.
 		undefined,
 		() => setIsDark(!isDark)
 	);

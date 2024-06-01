@@ -52,7 +52,7 @@ export function PersonCreate() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button type='button' variant={'action'}>
+                <Button type='button' variant={'action'} className='gap-2'>
                     Add a person
                 </Button>
             </DialogTrigger>
@@ -84,7 +84,7 @@ export function PersonCreate() {
                                 variant={"success"}
                                 className="text-primary"
                             >
-                                Add
+                                Create
                             </Button>
                         </DialogFooter>
                     </form>

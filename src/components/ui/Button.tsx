@@ -38,7 +38,7 @@ const buttonVariants = cva(
                 success:
                     "rounded-lg border border-success/20 bg-successForeground px-2 py-1 font-bold text-success",
                 action:
-                    "rounded-lg border border-success/20 bg-action px-2 py-1 font-bold text-primary",
+                    "rounded-lg border border-action/20 bg-action px-2 py-1 font-bold text-primary disabled:bg-foreground disabled:text-secondary",
             },
         },
     }

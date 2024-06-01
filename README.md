@@ -1,12 +1,12 @@
 # Opinionated CRUD Tinybase Starter
 
-This starter kit combines the best tools for building modern, high-performance web applications:
+personal starter i use to build local first apps combines the best tools for building modern, high-performance web applications:
 
-- [TinyBase](https://tinybase.org/) with React for data storing
+- [TinyBase](https://tinybase.org/) with React for data storing and more.
 - [Vite](https://vitejs.dev/) for lightning-fast development
-- [TanStack](https://tanstack.com/router/latest) Router for powerful routing
+- [TanStack](https://tanstack.com/router/latest) powerful routing system with vite plugin to auto generate routes
 - [TailwindCSS](https://tailwindcss.com/) for utility-first styling
-- [Shadcn/UI](https://ui.shadcn.com/) for beautiful, customizable UI components
+- [Shadcn/UI](https://ui.shadcn.com/) for beautiful, customizable UI components found in `components/ui`
 
 ## Store scheme
 
@@ -47,11 +47,44 @@ also you cannot add or rename to an existing `person` using this relationship ho
 const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
 ```
 
-## User interface
+### Schema-Based Typing wit tinybase
 
-This starter is using [shadcn/ui](https://ui.shadcn.com/) which is built on [radix-ui](https://www.radix-ui.com/primitives/docs/overview/introduction) primitives but with a little bit of changes to match the color variables in `style.css`.
+when using tinybase modules you can benefit from autocomplete and type constraints based on your TablesSchema and ValuesSchema here is how in `schema.ts`:
+
+```ts
+import * as UiReact from "tinybase/ui-react/with-schemas";
+
+const UiReactWithSchemas = UiReact as UiReact.WithSchemas<
+  [typeof TablesSchema, typeof ValuesSchema]
+>;
+
+//here you all ui-react export are schema typed so you will get error if for example tabelId or cellId are not matched and more
+export const {
+  Provider,
+  useCreateStore,
+  useCreateIndexes,
+  useCreateRelationships,
+  useValues,
+  useValue,
+  useSetPartialValuesCallback,
+  CellProps,
+  CellView,
+  RowView,
+  useRowIds,
+  useAddRowCallback,
+  useSliceIds,
+  useCell,
+  useSetPartialRowCallback,
+  LocalRowsView,
+  RowProps,
+  useLocalRowIds,
+  useDelRowCallback,
+} = UiReactWithSchemas;
+```
 
 ## Theming
+
+This starter is using [shadcn/ui](https://ui.shadcn.com/) which is built on [radix-ui](https://www.radix-ui.com/primitives/docs/overview/introduction) primitives but with a little bit of changes to match the color variables in `style.css`.
 
 in `style.css` you can change colors value for light and dark mode here:
 
@@ -93,10 +126,45 @@ if you choose to add a new variable make sure to add it in `tailwind.config.js`
 
 ```js
 theme: {
-    extend: {
-      colors: {
-        YourColor: "rgb(var(--YourColor) / <alpha-value>)",
+  extend: {
+    colors: {
+      YourColor: "rgb(var(--YourColor) / <alpha-value>)",
         }
       }
   }
+```
+
+## TanStack router:
+
+Using typed router context in [TanStack](https://tanstack.com/router/latest) we can pass tinybase store so we can utilize loaders and check if data is in in the database using the url param otherwise throw a `NotFound` and render that component here an example `person.$person`
+
+```js
+export const Route = createFileRoute("/_layout/person/$person")({
+  loader: ({ params: { person }, context: { store } }) => {
+    if (!store?.hasRow("person", person)) {
+      throw notFound();
+    }
+  },
+  notFoundComponent: () => {
+    return (
+      <div className="flex items-center justify-center gap-3 border border-warning bg-warningForeground p-2">
+        <LuAlertCircle className="size-4 text-warning" />
+        <p className="font-bold leading-none text-warning">
+          This person doesn't exist!
+        </p>
+      </div>
+    );
+  },
+  component: Person,
+});
+
+function Person() {
+  const { person } = Route.useParams();
+  return (
+    <div className="space-y-3">
+      <NoteCreate personId={person} />
+      <NoteRead personId={person} />
+    </div>
+  );
+}
 ```

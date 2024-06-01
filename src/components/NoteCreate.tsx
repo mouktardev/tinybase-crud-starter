@@ -59,7 +59,8 @@ export const NoteCreate = ({ personId }: { personId: string }) => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button type="button" variant={"action"}>
+                {/* if there are no person CreateNote is disabled */}
+                <Button type="button" variant={"action"} disabled={personRowIds.length === 0}>
                     Add a note
                 </Button>
             </DialogTrigger>
@@ -171,7 +172,7 @@ export const NoteCreate = ({ personId }: { personId: string }) => {
                                         </FormControl>
                                         <SelectContent align="center">
                                             <SelectGroup>
-                                                <SelectLabel>Type</SelectLabel>
+                                                <SelectLabel>Person</SelectLabel>
                                                 {personRowIds.map((rowId) => (
                                                     <SelectItem key={rowId} value={rowId}>
                                                         <RowView
@@ -194,7 +195,7 @@ export const NoteCreate = ({ personId }: { personId: string }) => {
                                     variant={"danger"}
                                     className="text-primary"
                                 >
-                                    cancel
+                                    Cancel
                                 </Button>
                             </DialogClose>
                             <Button
@@ -202,7 +203,7 @@ export const NoteCreate = ({ personId }: { personId: string }) => {
                                 variant={"success"}
                                 className="text-primary"
                             >
-                                Edit Note
+                                Create
                             </Button>
                         </DialogFooter>
                     </form>

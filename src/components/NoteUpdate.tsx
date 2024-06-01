@@ -172,7 +172,7 @@ export const NoteUpdate = (props: typeof CellProps) => {
                                         </FormControl>
                                         <SelectContent align="center">
                                             <SelectGroup>
-                                                <SelectLabel>Type</SelectLabel>
+                                                <SelectLabel>Person</SelectLabel>
                                                 {personRowIds.map((rowId) => (
                                                     <SelectItem key={rowId} value={rowId}>
                                                         <RowView
@@ -195,7 +195,7 @@ export const NoteUpdate = (props: typeof CellProps) => {
                                     variant={"danger"}
                                     className="text-primary"
                                 >
-                                    cancel
+                                    Cancel
                                 </Button>
                             </DialogClose>
                             <Button
@@ -203,7 +203,7 @@ export const NoteUpdate = (props: typeof CellProps) => {
                                 variant={"success"}
                                 className="text-primary"
                             >
-                                Edit Note
+                                Edit
                             </Button>
                         </DialogFooter>
                     </form>

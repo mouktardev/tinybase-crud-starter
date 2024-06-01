@@ -91,7 +91,7 @@ export function PersonUpdate(props: typeof CellProps) {
                                     variant={"danger"}
                                     className="text-primary"
                                 >
-                                    cancel
+                                    Cancel
                                 </Button>
                             </DialogClose>
                             <Button

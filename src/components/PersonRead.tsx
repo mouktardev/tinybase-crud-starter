@@ -9,7 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/Popover"
 export function PersonRead() {
     const personRowIds = useRowIds("person")
     return (
-        <div className="space-y-3 border-b border-accent p-2 md:border-b-0 md:border-r">
+        <div className="space-y-3 border-b border-accent p-2 md:min-w-28 md:border-b-0 md:border-r">
             {personRowIds.map((rowId) => (
                 <RowView
                     key={rowId}
