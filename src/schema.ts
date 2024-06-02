@@ -21,6 +21,9 @@ export const InitialValueData = {
 };
 
 export const InitialTableData = {
+	person:{
+		0:{name:"Lisa"},
+	},
 	notes:{
 		0:{
 			date: "2024/12/1",
@@ -28,9 +31,6 @@ export const InitialTableData = {
 			status: true,
 			personId: 0,	
 		},
-	},
-	person:{
-		0:{name:"Lisa"},
 	}
 };
 

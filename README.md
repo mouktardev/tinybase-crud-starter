@@ -1,6 +1,6 @@
 # Opinionated CRUD Tinybase Starter
 
-personal starter i use to build local first apps combines the best tools for building modern, high-performance web applications:
+This CRUD starter use `indexedDB` to persist your changes to build local first apps and combines the best tools for building modern web applications:
 
 - [TinyBase](https://tinybase.org/) with React for data storing and more.
 - [Vite](https://vitejs.dev/) for lightning-fast development
@@ -8,11 +8,72 @@ personal starter i use to build local first apps combines the best tools for bui
 - [TailwindCSS](https://tailwindcss.com/) for utility-first styling
 - [Shadcn/UI](https://ui.shadcn.com/) for beautiful, customizable UI components found in `components/ui`
 
-## Store scheme
+## introduction
 
-There is two tables `person` and `notes` with one to many relationship you can add, edit and delete them. There is also values in this starter like `isThemeDark` you can toggle it directly.
+There is two tables `person` and `notes` with one to many relationship you can create, delete or edit unique people and the same with their notes simple right. There is also values in this starter like `isThemeDark` you can toggle it directly.
 
-inside `schema.ts` you will find Tables and Values schema:
+## TinyBase Store and persister
+
+From [TinyBase](https://tinybase.org/) we are using `store`, `indexes` and `relationships` each with their hooks and components for example in `main.ts`:
+
+- Here we initialize `store` and persist changes in `indexedDb`, now we can use `store` hooks and components to mutate and display data.
+
+```js
+const store = useCreateStore(() =>
+  createStore().setTablesSchema(TablesSchema).setValuesSchema(ValuesSchema)
+);
+useCreatePersister(
+  store,
+  (store) => {
+    return createIndexedDbPersister(store, "store");
+  },
+  [],
+  async (persister) => {
+    await persister?.startAutoLoad(InitialTableData, InitialValueData);
+    await persister?.startAutoSave();
+  }
+);
+```
+
+- Here we initialize `indexes` so we can use its hooks to check
+  whether a `person` exist by returning an array of `name` cell value of all `person` table.
+
+```js
+const indexes = useCreateIndexes(store, (store) =>
+  createIndexes(store).setIndexDefinition("by_person", "person", "name")
+);
+```
+
+```js
+const persons = useSliceIds("by_person");
+```
+
+- Lastly we initialize `relationships` between `person` and `notes` table to use a hook to retrieve all notes based on a `personId` then use components to display it.
+
+```js
+const relationships = useCreateRelationships(store, (store) => {
+  return createRelationships(store).setRelationshipDefinition(
+    "person_notes",
+    "notes",
+    "person",
+    "personId"
+  );
+});
+```
+
+```js
+const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
+```
+
+```js
+const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
+```
+
+### Schema-Based Typing wit tinybase
+
+When using tinybase modules you can benefit from autocomplete and type constraints based on your `TablesSchema` and `ValuesSchema` here is how in `schema.ts`:
+
+- create schema:
 
 ```ts
 export const TablesSchema = {
@@ -31,7 +92,7 @@ export const ValuesSchema = {
 } as const;
 ```
 
-and you can initial the values for them if you like, for example here we initialized `isThemeDark` using theme local storage value:
+- You can initial the values for them if you like, for example here we initialized `isThemeDark` using theme local storage value:
 
 ```ts
 export const InitialValueData = {
@@ -39,17 +100,7 @@ export const InitialValueData = {
 };
 ```
 
-#### Note
-
-also you cannot add or rename to an existing `person` using this relationship hook.
-
-```js
-const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
-```
-
-### Schema-Based Typing wit tinybase
-
-when using tinybase modules you can benefit from autocomplete and type constraints based on your TablesSchema and ValuesSchema here is how in `schema.ts`:
+- Lastly we can use our scheme and export `Tinybase` modules to use in our app, since they are schema typed you will get error if for example a tabelId or a cellId are not matched and more.
 
 ```ts
 import * as UiReact from "tinybase/ui-react/with-schemas";
@@ -58,7 +109,6 @@ const UiReactWithSchemas = UiReact as UiReact.WithSchemas<
   [typeof TablesSchema, typeof ValuesSchema]
 >;
 
-//here you all ui-react export are schema typed so you will get error if for example tabelId or cellId are not matched and more
 export const {
   Provider,
   useCreateStore,
@@ -84,7 +134,7 @@ export const {
 
 ## TanStack router:
 
-Using typed router context in [TanStack](https://tanstack.com/router/latest) we can pass tinybase store so we can utilize loaders and check if data is in in the database using the url param otherwise throw a `NotFound` and render that component here an example `person.$person`
+Using typed router context in [TanStack](https://tanstack.com/router/latest) we can pass `store` so we can utilize `loaders` and check if data is in in the database using `url params` otherwise throw a `NotFound` that render's `notFoundComponent`, for example in `person.$person.tsx`
 
 ```js
 export const Route = createFileRoute("/_layout/person/$person")({
@@ -105,23 +155,13 @@ export const Route = createFileRoute("/_layout/person/$person")({
   },
   component: Person,
 });
-
-function Person() {
-  const { person } = Route.useParams();
-  return (
-    <div className="space-y-3">
-      <NoteCreate personId={person} />
-      <NoteRead personId={person} />
-    </div>
-  );
-}
 ```
 
 ## Theming
 
-This starter is using [shadcn/ui](https://ui.shadcn.com/) which is built on [radix-ui](https://www.radix-ui.com/primitives/docs/overview/introduction) primitives but with a little bit of changes to match the color variables in `style.css`.
+This starter is using [shadcn/ui](https://ui.shadcn.com/) which is built on [radix-ui](https://www.radix-ui.com/primitives/docs/overview/introduction) primitives and more but with a little bit of changes to match the color variables in `style.css`.
 
-in `style.css` you can change colors value for light and dark mode here:
+- In `style.css` you can change colors value for light and dark mode here:
 
 ```css
 :root {
@@ -157,7 +197,7 @@ in `style.css` you can change colors value for light and dark mode here:
 }
 ```
 
-if you choose to add a new variable make sure to add it in `tailwind.config.js`
+- If you choose to add a new color variable make sure to add it in `tailwind.config.js`
 
 ```js
 theme: {

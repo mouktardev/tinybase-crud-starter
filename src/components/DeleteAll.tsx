@@ -18,7 +18,7 @@ export const DeleteAll = () => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button type="button" variant={"danger"} className="text-primary">
+                <Button type="button" variant={"danger"}>
                     Clear indexedDB
                 </Button>
             </DialogTrigger>

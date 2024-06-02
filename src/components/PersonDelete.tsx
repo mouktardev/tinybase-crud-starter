@@ -1,4 +1,5 @@
 import { CellProps, CellView, useCell, useDelRowCallback, useLocalRowIds } from "@/schema";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { LuTrash } from "react-icons/lu";
 import { toast } from "sonner";
@@ -6,6 +7,7 @@ import { Button } from "./ui/Button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/Dialog";
 
 export function PersonDelete(props: typeof CellProps) {
+    const navigate = useNavigate()
     const [open, setOpen] = useState<boolean>(false);
     const person = useCell("person", props.rowId, "name")
     const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
@@ -14,6 +16,7 @@ export function PersonDelete(props: typeof CellProps) {
         props.rowId,
         undefined,
         () => {
+            navigate({ to: '/person', })
             toast.success(`${person} is removed`);
         }
     );
