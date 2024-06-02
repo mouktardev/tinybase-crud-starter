@@ -14,7 +14,7 @@ There is two tables `person` and `notes` with one to many relationship you can c
 
 ## TinyBase Store and persister
 
-From [TinyBase](https://tinybase.org/) we are using `store`, `indexes` and `relationships` each with their hooks and components for example in `main.ts`:
+From [TinyBase](https://tinybase.org/) we are using `store`, `indexes` and `relationships` each with their hooks and components for example in [`main.ts`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/main.tsx):
 
 - Here we initialize `store` and persist changes in `indexedDb`, now we can use `store` hooks and components to mutate and display data.
 
@@ -71,7 +71,7 @@ const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
 
 ### Schema-Based Typing wit tinybase
 
-When using tinybase modules you can benefit from autocomplete and type constraints based on your `TablesSchema` and `ValuesSchema` here is how in `schema.ts`:
+When using tinybase modules you can benefit from autocomplete and type constraints based on your `TablesSchema` and `ValuesSchema` here is how in [`schema.ts`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/schema.ts):
 
 - create schema:
 
@@ -134,7 +134,7 @@ export const {
 
 ## TanStack router:
 
-Using typed router context in [TanStack](https://tanstack.com/router/latest) we can pass `store` so we can utilize `loaders` and check if data is in in the database using `url params` otherwise throw a `NotFound` that render's `notFoundComponent`, for example in `person.$person.tsx`
+Using typed router context in [TanStack](https://tanstack.com/router/latest) we can pass `store` so we can utilize `loaders` and check if data is in in the database using `url params` otherwise throw a `NotFound` that render's `notFoundComponent`, for example in [`person.$person.tsx`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/routes/_layout/person.%24person.tsx)
 
 ```js
 export const Route = createFileRoute("/_layout/person/$person")({
@@ -159,9 +159,9 @@ export const Route = createFileRoute("/_layout/person/$person")({
 
 ## Theming
 
-This starter is using [shadcn/ui](https://ui.shadcn.com/) which is built on [radix-ui](https://www.radix-ui.com/primitives/docs/overview/introduction) primitives and more but with a little bit of changes to match the color variables in `style.css`.
+This starter is using [shadcn/ui](https://ui.shadcn.com/) which is built on [radix-ui](https://www.radix-ui.com/primitives/docs/overview/introduction) primitives and more but with a little bit of changes to match the color variables in [`style.css`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/styles.css).
 
-- In `style.css` you can change colors value for light and dark mode here:
+- In [`style.css`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/styles.css) you can change colors value for light and dark mode here:
 
 ```css
 :root {
@@ -197,7 +197,7 @@ This starter is using [shadcn/ui](https://ui.shadcn.com/) which is built on [rad
 }
 ```
 
-- If you choose to add a new color variable make sure to add it in `tailwind.config.js`
+- If you choose to add a new color variable make sure to add it in [`tailwind.config.js`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/tailwind.config.js)
 
 ```js
 theme: {
