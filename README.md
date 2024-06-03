@@ -1,4 +1,4 @@
-# Opinionated CRUD Tinybase Starter
+# Opinionated CRUD tinybase starter
 
 This CRUD starter use `indexedDB` to persist your changes to build local first apps and combines the best tools for building modern web applications:
 
@@ -12,7 +12,7 @@ This CRUD starter use `indexedDB` to persist your changes to build local first a
 
 There is two tables `person` and `notes` with one to many relationship you can create, delete or edit unique people and the same with their notes simple right. There is also values in this starter like `isThemeDark` you can toggle it directly.
 
-## TinyBase Store and persister
+## TinyBase store and persister
 
 From [TinyBase](https://tinybase.org/) we are using `store`, `indexes` and `relationships` each with their hooks and components for example in [`main.ts`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/main.tsx):
 
@@ -65,7 +65,7 @@ const relationships = useCreateRelationships(store, (store) => {
 const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
 ```
 
-### Schema-Based Typing wit tinybase
+### Schema-Based typing with tinybase
 
 When using tinybase modules you can benefit from autocomplete and type constraints based on your `TablesSchema` and `ValuesSchema` here is how in [`schema.ts`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/schema.ts):
 
@@ -204,6 +204,7 @@ theme: {
       }
   }
 ```
+
 ---
 
->  find me on x [@mouktardev](https://x.com/mouktardev) or threads [@mouktardev](https://www.threads.net/@mouktardev)
+> find me on x [@mouktardev](https://x.com/mouktardev) or threads [@mouktardev](https://www.threads.net/@mouktardev)
