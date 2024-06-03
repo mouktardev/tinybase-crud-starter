@@ -65,10 +65,6 @@ const relationships = useCreateRelationships(store, (store) => {
 const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
 ```
 
-```js
-const personIdsLinkedToNotes = useLocalRowIds("person_notes", props.rowId);
-```
-
 ### Schema-Based Typing wit tinybase
 
 When using tinybase modules you can benefit from autocomplete and type constraints based on your `TablesSchema` and `ValuesSchema` here is how in [`schema.ts`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/schema.ts):
@@ -208,3 +204,6 @@ theme: {
       }
   }
 ```
+---
+
+>  find me on x [@mouktardev](https://x.com/mouktardev) or threads [@mouktardev](https://www.threads.net/@mouktardev)
