@@ -3,10 +3,10 @@
 This CRUD starter use `indexedDB` to persist your changes to build local first apps and combines the best tools for building modern web applications:
 
 - [TinyBase](https://tinybase.org/) with React for data storing and more.
-- [Vite](https://vitejs.dev/) for lightning-fast development
-- [TanStack](https://tanstack.com/router/latest) powerful routing system with vite plugin to auto generate routes
-- [TailwindCSS](https://tailwindcss.com/) for utility-first styling
-- [Shadcn/UI](https://ui.shadcn.com/) for beautiful, customizable UI components found in `components/ui`
+- [Vite](https://vitejs.dev/) for lightning-fast development.
+- [TanStack](https://tanstack.com/router/latest) powerful routing system with vite plugin to auto generate routes.
+- [TailwindCSS](https://tailwindcss.com/) for utility-first styling.
+- [Shadcn/UI](https://ui.shadcn.com/) for beautiful, customizable UI components found in `components/ui`.
 
 ## introduction
 
