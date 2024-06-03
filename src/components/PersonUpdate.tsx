@@ -78,7 +78,7 @@ export function PersonUpdate(props: typeof CellProps) {
                                         </span>
                                     </FormLabel>
                                     <FormControl>
-                                        <Input placeholder="add a person" {...field} />
+                                        <Input placeholder="rename a person" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
