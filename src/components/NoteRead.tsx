@@ -22,7 +22,7 @@ const CustomCellPersonNotes = (props: typeof CellProps) => {
     <>
       {personIdsLinkedToNotes.length > 0 && (
         <div className="relative overflow-hidden rounded-lg border border-accent">
-          <Table className="max-w-32 md:max-w-full">
+          <Table className="max-w-[dvw] md:max-w-full">
             <TableHeader>
               <TableRow>
                 <TableHead>Date</TableHead>
