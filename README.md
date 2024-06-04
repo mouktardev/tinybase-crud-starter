@@ -14,7 +14,7 @@ There is two tables `person` and `notes` with one to many relationship you can c
 
 ## TinyBase store and persister
 
-From [TinyBase](https://tinybase.org/) we are using `store`, `indexes` and `relationships` each with their hooks and components for example in [`main.ts`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/main.tsx):
+From [TinyBase](https://tinybase.org/) we are using `store`, `indexes` and `relationships` each with their hooks and components for example in [`main.tsx`](https://github.com/mouktardev/tinybase-crud-starter/blob/master/src/main.tsx):
 
 - Here we initialize `store` and persist changes in `indexedDb`, now we can use `store` hooks and components to mutate and display data.
 
